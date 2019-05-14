@@ -4,6 +4,12 @@ module SessionsHelper
     session[:user_id] = user.id
   end
   
+   # 永続的セッションを破棄する
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
    # ユーザーのセッションを永続的にする
   def remember(user)
     user.remember
@@ -14,6 +20,8 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+  
+ 
 
   
   def current_user
@@ -35,12 +43,7 @@ module SessionsHelper
      
   end
   
-  # 永続的セッションを破棄する
-  def forget(user)
-    user.forget
-    cookies.delete(:user_id)
-    cookies.delete(:remember_token)
-  end
+  
   
    def log_out
       forget(current_user)
