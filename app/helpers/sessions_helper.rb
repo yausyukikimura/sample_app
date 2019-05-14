@@ -10,6 +10,7 @@ module SessionsHelper
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
+  
    # ユーザーのセッションを永続的にする
   def remember(user)
     user.remember
