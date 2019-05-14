@@ -29,8 +29,8 @@ class User < ApplicationRecord
   end
   def authenticated?(attribute,token)
     digest = send("#{attribute}_digest")
-    return false if remember_digest.nil?
-    BCrypt::Password.new(digest).is_password?(remember_token)
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
   
   # ユーザーのログイン情報を破棄する
