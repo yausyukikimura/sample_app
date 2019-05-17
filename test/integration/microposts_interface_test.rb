@@ -18,9 +18,9 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     # 有効な送信
     content = "This micropost really ties the room together"
     assert_difference 'Micropost.count', 1 do
-      post microposts_path, micropost: { content: content, picture: picture }
+       post microposts_path, params: { micropost: { content: content } }
     end
-   assert assigns(:micropost).picture?
+   assert_redirected_to root_url
     follow_redirect!
     assert_match content, response.body
     # 投稿を削除する
